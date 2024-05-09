@@ -17,18 +17,9 @@ export default function TableNavigation({rowSelectionModel, setRowSelectionModel
 
     const [openSearchModal, setOpenSearchModal] = useState(false);
     const [openOrderModal, setOpenOrderModal] = useState(false);
-    const [openFilterModal, setOpenFilterModal] = useState(false);
     // TO-DO: search modal ref
     // TO-DO: order modal ref
     // TO-DO: filter modal ref
-
-    const orderTypes: string[] = [
-        'Standard', 
-        'SaleOrder', 
-        'PurchaseOrder', 
-        'TransferOrder', 
-        'ReturnOrder'
-    ];
 
     function deleteSelectedOrder() {
         deleteOrders(rowSelectionModel.map(orderId => orderId.toString()));
@@ -64,27 +55,6 @@ export default function TableNavigation({rowSelectionModel, setRowSelectionModel
                 >
                     Delete Selected
                 </Button>
-                <Button
-                    variant="outlined"
-                    size={"small"}
-                    endIcon={<KeyboardArrowDownSharp />}
-                    onClick={() => setOpenFilterModal(!openFilterModal)}
-                    sx={{marginLeft: '8px'}}
-                >
-                    Order Type
-                </Button>
-                <Menu
-                    open={openFilterModal}
-                    sx={{marginLeft: '8px'}}
-                >
-                    {orderTypes.map((type, index) => {
-                        return (
-                            <MenuItem key={index} onClick={() => setOpenFilterModal(false)}>
-                                {type}
-                            </MenuItem>
-                        );
-                    })}
-                </Menu>
             </Stack>
             <SearchOrderModal open={openSearchModal} setOpen={setOpenSearchModal} />
             <OrderModal open={openOrderModal} setOpen={setOpenOrderModal} />

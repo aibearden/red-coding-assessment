@@ -1,3 +1,5 @@
+import { NewOrderInterface } from "../components/Home";
+
 const sampleReturn = [
     {"createdByUserName": "Austin Bearden",
         "createdDate": "Wednesday, 08 May 2024",
@@ -25,7 +27,8 @@ export const getOrders = async () => {
             headers: new Headers({
                 "ApiKey": getApiKey(),
                 "Accept": "*/*",
-                "Connection": "keep-alive"
+                "Connection": "keep-alive",
+                "Content-Type": "application/json-patch+json"
             })
         });
 
@@ -40,9 +43,10 @@ export const getOrderByTypes = async (orderTypes: string[]) => {
         const response = await fetch(`https://red-candidate-web.azurewebsites.net/api/Order/ByType?orderType=${orderTypes}`, {
             method: 'GET',
             headers: new Headers({
-                "ApiKey": "b7b77702-b4ec-4960-b3f7-7d40e44cf5f4",
+                "ApiKey": getApiKey(),
                 "Accept": "*/*",
-                "Connection": "keep-alive"
+                "Connection": "keep-alive",
+                "Content-Type": "application/json-patch+json"
             })
         });
 
@@ -52,14 +56,16 @@ export const getOrderByTypes = async (orderTypes: string[]) => {
     }
 }
 
-export const postOrder = async () => {
+export const postOrder = async (newOrder: NewOrderInterface) => {
     try {
         const response = await fetch("https://red-candidate-web.azurewebsites.net/api/Orders", {
-            method: 'GET',
+            method: 'POST',
+            body: JSON.stringify(newOrder),
             headers: new Headers({
-                "ApiKey": "b7b77702-b4ec-4960-b3f7-7d40e44cf5f4",
+                "ApiKey": getApiKey(),
                 "Accept": "*/*",
-                "Connection": "keep-alive"
+                "Connection": "keep-alive",
+                "Content-Type": "application/json-patch+json"
             })
         });
 
@@ -75,7 +81,7 @@ export const deleteOrders = async (orders: string[]) => {
             method: 'POST',
             body: JSON.stringify(orders),
             headers: new Headers({
-                "ApiKey": "b7b77702-b4ec-4960-b3f7-7d40e44cf5f4",
+                "ApiKey": getApiKey(),
                 "Accept": "*/*",
                 "Connection": "keep-alive",
                 "Content-Type": "application/json-patch+json"

@@ -5,14 +5,7 @@ import { DataGrid, GridColDef, GridRowId } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import { getOrders } from "../fetch/orders";
 import { Edit } from "@mui/icons-material";
-
-interface OrderInterface {
-    orderId: string,
-    orderType: string, // could make this an enum
-    customerName: string,
-    createdDate: string,
-    createdByUserName: string
-}
+import { OrderInterface } from "./Home";
 
 interface ItemListInterface {
     rowSelectionModel: GridRowId[],

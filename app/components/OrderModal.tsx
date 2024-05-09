@@ -1,27 +1,49 @@
 "use client"
 
-import { Dialog, FormControl, InputLabel, Input, Card, Stack, DialogTitle, DialogContent } from "@mui/material";
+import { Dialog, FormControl, InputLabel, Input, Stack, DialogTitle, DialogContent, DialogActions, Button } from "@mui/material";
+import { useState } from "react";
+import { NewOrderInterface } from "./Home";
+import { postOrder } from "../fetch/orders";
+import OrderTypeMenu from "./OrderTypeMenu";
 
-export default function OrderModal({open, setOpen}: {open: boolean, setOpen: (arg0: boolean) => void}) {
-    
+export default function OrderModal({ open, setOpen }: { open: boolean, setOpen: (arg0: boolean) => void }) {
+
+    const [newOrder, setNewOrder] = useState<NewOrderInterface>({
+        orderType: "Standard",
+        customerName: "",
+        createdDate: new Date().toDateString(),
+        createdByUserName: ""
+    });
+
+    function saveOrder() {
+        postOrder(newOrder)
+    }
+
+    console.log(newOrder);
+
     return (
         <Dialog onClose={() => setOpen(false)} open={open}>
-            <DialogTitle>Order</DialogTitle>
+            <DialogTitle>New Order</DialogTitle>
             <DialogContent sx={{ height: 400, width: 300 }}>
-                    <Stack direction={'column'} justifyContent={'space-between'}>
-                        <FormControl variant="standard" id={"order-id"}>
+                <Stack sx={{ height: '90%' }} direction={'column'} justifyContent={'space-evenly'}>
+                    {/* <FormControl variant="standard" id={"order-id"}>
                             <InputLabel>Order Id</InputLabel>
-                            <Input id="order-id" defaultValue="string" />
-                        </FormControl>
-                        <FormControl variant="standard" id={"order-type"}>
-                            <InputLabel>Order Type</InputLabel>
-                            <Input id="order-type" defaultValue="string" />
-                        </FormControl>
-                        <FormControl variant="standard" id={"customer-name"}>
-                            <InputLabel>Customer Name</InputLabel>
-                            <Input id="customer-name" defaultValue="string" />
-                        </FormControl>
-                    </Stack>
+                            <Input id="order-id" defaultValue="" value={newOd}/>
+                        </FormControl> */}
+                    <OrderTypeMenu orderType={newOrder.orderType} setOrderType={(orderType: string) => setNewOrder({...newOrder, orderType: orderType})} />
+                    <FormControl variant="standard" id={"customer-name"}>
+                        <InputLabel>Customer Name</InputLabel>
+                        <Input id="customer-name" defaultValue="" value={newOrder.customerName} onChange={(evt) => setNewOrder({...newOrder, customerName: evt.target.value})} />
+                    </FormControl>
+                    <FormControl variant="standard" id={"user-name"}>
+                        <InputLabel>Created By User Name</InputLabel>
+                        <Input id="created-by-user-name" defaultValue="" value={newOrder.createdByUserName} onChange={(evt) => setNewOrder({...newOrder, createdByUserName: evt.target.value})} />
+                    </FormControl>
+                </Stack>
+                <Stack sx={{height: '8%', marginTop: '4%'}} direction={'row'} justifyContent={'flex-end'}>
+                    <Button size={'small'} variant={'outlined'} onClick={() => setOpen(false)}>Cancel</Button>
+                    <Button sx={{marginLeft: '4px'}} size={'small'} variant={'contained'} onClick={saveOrder}>Save</Button>
+                </Stack>
             </DialogContent>
         </Dialog>
     );
