@@ -68,3 +68,24 @@ export const postOrder = async () => {
         throw new Error(`Error getting orders + ${e}`)
     }
 }
+
+export const deleteOrders = async (orders: string[]) => {
+    try {
+        const response = await fetch("https://red-candidate-web.azurewebsites.net/api/Orders/Delete", {
+            method: 'POST',
+            body: JSON.stringify(orders),
+            headers: new Headers({
+                "ApiKey": "b7b77702-b4ec-4960-b3f7-7d40e44cf5f4",
+                "Accept": "*/*",
+                "Connection": "keep-alive",
+                "Content-Type": "application/json-patch+json"
+            })
+        });
+
+        if(!response.ok) {
+            throw new Error(`Error deleting orders`)
+        }
+    } catch(e) {
+        throw new Error(`Error deleting orders + ${e}`)
+    }
+}

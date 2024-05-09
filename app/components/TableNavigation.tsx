@@ -5,8 +5,15 @@ import SearchOrderModal from "./SearchOrderModal";
 import OrderModal from "./OrderModal";
 import { useState } from "react";
 import { Add, Delete, KeyboardArrowDownSharp, SearchOutlined } from "@mui/icons-material";
+import { deleteOrders } from "../fetch/orders";
+import { GridRowId } from "@mui/x-data-grid";
 
-export default function TableNavigation() {
+interface TableNavigationInterface {
+    rowSelectionModel: GridRowId[],
+    setRowSelectionModel: any
+}
+
+export default function TableNavigation({rowSelectionModel, setRowSelectionModel}: TableNavigationInterface) {
 
     const [openSearchModal, setOpenSearchModal] = useState(false);
     const [openOrderModal, setOpenOrderModal] = useState(false);
@@ -22,6 +29,11 @@ export default function TableNavigation() {
         'TransferOrder', 
         'ReturnOrder'
     ];
+
+    function deleteSelectedOrder() {
+        deleteOrders(rowSelectionModel.map(orderId => orderId.toString()));
+        setRowSelectionModel([]);
+    }
 
     return (
         <>
@@ -46,7 +58,7 @@ export default function TableNavigation() {
                 <Button
                     size={"small"}
                     variant={"contained"}
-                    onClick={() => setOpenOrderModal(true)}
+                    onClick={() => deleteSelectedOrder()}
                     startIcon={<Delete />}
                     sx={{marginLeft: '8px'}}
                 >

@@ -5,14 +5,17 @@ import TopBar from "./TopBar";
 import TableNavigation from "./TableNavigation";
 import ItemList from "./ItemList";
 import React, { useEffect, useState } from "react";
+import { GridRowSelectionModel } from "@mui/x-data-grid";
 
 export default function Home() {
+
+    const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>([]);
 
     return (
         <Stack sx={{ width: '100vw', height: '100vh'}}>
             <TopBar />
-            <TableNavigation />
-            <ItemList />
+            <TableNavigation rowSelectionModel={rowSelectionModel} setRowSelectionModel={setRowSelectionModel} />
+            <ItemList rowSelectionModel={rowSelectionModel} setRowSelectionModel={setRowSelectionModel} />
         </Stack>
     );
 };

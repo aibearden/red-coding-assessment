@@ -19,7 +19,6 @@ export default function TopBar() {
         sessionStorage.setItem("ApiKey", "");
     }
 
-
     return (
         <Stack
             direction={"row"}
