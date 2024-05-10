@@ -58,6 +58,7 @@ export default function TableNavigation({searchOrders, rowSelectionModel, setRow
                 </Button>
                 <OrderTypeFilter orderTypes={filteredOrderTypes} setOrderTypes={setFilteredOrderTypes} />
             </Stack>
+            
             <OrderModal open={openOrderModal} setOpen={setOpenOrderModal} />
         </>
     );
