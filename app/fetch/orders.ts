@@ -1,6 +1,8 @@
 import { NewOrderInterface } from "../interfaces/orders";
 
-const sampleReturn = [
+export const baseUrl = "https://red-candidate-web.azurewebsites.net/api";
+
+export const sampleReturn = [
     {"createdByUserName": "Austin Bearden",
         "createdDate": "Wednesday, 08 May 2024",
         "customerName": "John Doe",
@@ -22,7 +24,7 @@ const getApiKey = () => {
 
 export const getOrders = async () => {
     try {
-        const response = await fetch("https://red-candidate-web.azurewebsites.net/api/Orders", {
+        const response = await fetch(`${baseUrl}/Orders`, {
             method: 'GET',
             headers: new Headers({
                 "ApiKey": getApiKey(),
@@ -40,7 +42,7 @@ export const getOrders = async () => {
 
 export const getOrderByTypes = async (orderTypes: string[]) => {
     try {
-        const response = await fetch(`https://red-candidate-web.azurewebsites.net/api/Orders/ByType?orderType=${orderTypes.join(',')}`, {
+        const response = await fetch(`${baseUrl}/Orders/ByType?orderType=${orderTypes.join(',')}`, {
             method: 'GET',
             headers: new Headers({
                 "ApiKey": getApiKey(),
@@ -58,7 +60,7 @@ export const getOrderByTypes = async (orderTypes: string[]) => {
 
 export const postOrder = async (newOrder: NewOrderInterface) => {
     try {
-        const response = await fetch("https://red-candidate-web.azurewebsites.net/api/Orders", {
+        const response = await fetch("${baseUrl}/Orders", {
             method: 'POST',
             body: JSON.stringify(newOrder),
             headers: new Headers({
@@ -77,7 +79,7 @@ export const postOrder = async (newOrder: NewOrderInterface) => {
 
 export const deleteOrders = async (orders: string[]) => {
     try {
-        const response = await fetch("https://red-candidate-web.azurewebsites.net/api/Orders/Delete", {
+        const response = await fetch("${baseUrl}/Orders/Delete", {
             method: 'POST',
             body: JSON.stringify(orders),
             headers: new Headers({

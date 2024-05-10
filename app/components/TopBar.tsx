@@ -48,7 +48,7 @@ export default function TopBar() {
                         horizontal: 'left',
                     }}
                 >
-                    <Button onClick={clearApiKey}>Clear ApiKey</Button>
+                    <Button onClick={clearApiKey}>Clear Api Key</Button>
                 </Popover>
             </Stack>
         </Stack>

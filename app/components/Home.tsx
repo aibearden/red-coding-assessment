@@ -23,7 +23,6 @@ export default function Home() {
     }
 
     useEffect(() => {
-        console.log(filteredOrderTypes)
         if(filteredOrderTypes.length > 0) {
             getOrderByTypes(filteredOrderTypes).then((data) => {
                 setOrders(data);

@@ -31,6 +31,7 @@ export default function TableNavigation({searchOrders, rowSelectionModel, setRow
                 <TextField
                     size={"small"}
                     onChange={(evt) => searchOrders(evt.target.value)}
+                    label={'Customer Search'}
                     InputProps={{
                         endAdornment: <InputAdornment position="end">
                             <SearchOutlined />
