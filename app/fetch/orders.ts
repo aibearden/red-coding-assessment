@@ -1,4 +1,4 @@
-import { NewOrderInterface } from "../components/Home";
+import { NewOrderInterface } from "../interfaces/orders";
 
 const sampleReturn = [
     {"createdByUserName": "Austin Bearden",

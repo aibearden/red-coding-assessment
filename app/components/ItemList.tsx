@@ -5,16 +5,15 @@ import { DataGrid, GridColDef, GridRowId } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import { getOrders } from "../fetch/orders";
 import { Edit } from "@mui/icons-material";
-import { OrderInterface } from "./Home";
+import { OrderInterface } from "../interfaces/orders";
 
 interface ItemListInterface {
+    orders: OrderInterface[],
     rowSelectionModel: GridRowId[],
     setRowSelectionModel: any
 }
 
-export default function ItemList({rowSelectionModel, setRowSelectionModel}: ItemListInterface) {
-
-    const [orders, setOrders] = useState<OrderInterface[]>([]);
+export default function ItemList({orders, rowSelectionModel, setRowSelectionModel}: ItemListInterface) {
 
     function handleEdit(evt: any, orderId: GridRowId) {
         evt.stopPropagation();
@@ -33,11 +32,8 @@ export default function ItemList({rowSelectionModel, setRowSelectionModel}: Item
          }}
     ];
 
-    useEffect(() => {
-        getOrders().then((data) => {
-            setOrders(data);
-        })
-    }, [])
+    // could make this better with a custom hook with a custom made debounce in it
+
 
     return (
         <Box sx={{height: 400, width: '100%'}}>

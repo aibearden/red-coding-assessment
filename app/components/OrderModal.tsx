@@ -2,12 +2,13 @@
 
 import { Dialog, FormControl, InputLabel, Input, Stack, DialogTitle, DialogContent, DialogActions, Button } from "@mui/material";
 import { useState } from "react";
-import { NewOrderInterface } from "./Home";
 import { postOrder } from "../fetch/orders";
 import OrderTypeMenu from "./OrderTypeMenu";
+import { NewOrderInterface } from "../interfaces/orders";
+import { useAppDispatch } from "@/lib/hooks";
 
 export default function OrderModal({ open, setOpen }: { open: boolean, setOpen: (arg0: boolean) => void }) {
-
+    const dispath = useAppDispatch();
     const [newOrder, setNewOrder] = useState<NewOrderInterface>({
         orderType: "Standard",
         customerName: "",
@@ -15,11 +16,12 @@ export default function OrderModal({ open, setOpen }: { open: boolean, setOpen: 
         createdByUserName: ""
     });
 
-    function saveOrder() {
-        postOrder(newOrder)
-    }
 
-    console.log(newOrder);
+    function saveOrder() {
+        postOrder(newOrder).then(_ => {
+            setOpen(false);
+        })
+    }
 
     return (
         <Dialog onClose={() => setOpen(false)} open={open}>

@@ -1,21 +1,21 @@
 "use client"
 
-import { Button, InputAdornment, Stack, TextField, Menu, MenuItem } from "@mui/material";
-import SearchOrderModal from "./SearchOrderModal";
+import { Button, InputAdornment, Stack, TextField } from "@mui/material";
 import OrderModal from "./OrderModal";
 import { useState } from "react";
-import { Add, Delete, KeyboardArrowDownSharp, SearchOutlined } from "@mui/icons-material";
+import { Add, Delete, SearchOutlined } from "@mui/icons-material";
 import { deleteOrders } from "../fetch/orders";
 import { GridRowId } from "@mui/x-data-grid";
+import { OrderInterface } from "../interfaces/orders";
 
 interface TableNavigationInterface {
+    searchOrders: any,
     rowSelectionModel: GridRowId[],
     setRowSelectionModel: any
 }
 
-export default function TableNavigation({rowSelectionModel, setRowSelectionModel}: TableNavigationInterface) {
+export default function TableNavigation({searchOrders, rowSelectionModel, setRowSelectionModel}: TableNavigationInterface) {
 
-    const [openSearchModal, setOpenSearchModal] = useState(false);
     const [openOrderModal, setOpenOrderModal] = useState(false);
     // TO-DO: search modal ref
     // TO-DO: order modal ref
@@ -31,6 +31,7 @@ export default function TableNavigation({rowSelectionModel, setRowSelectionModel
             <Stack direction={'row'} justifyContent={'flex-start'} alignItems={'center'} sx={{width: '100%', padding: '8px'}}>
                 <TextField
                     size={"small"}
+                    onChange={(evt) => searchOrders(evt.target.value)}
                     InputProps={{
                         endAdornment: <InputAdornment position="end">
                             <SearchOutlined />
@@ -56,7 +57,6 @@ export default function TableNavigation({rowSelectionModel, setRowSelectionModel
                     Delete Selected
                 </Button>
             </Stack>
-            <SearchOrderModal open={openSearchModal} setOpen={setOpenSearchModal} />
             <OrderModal open={openOrderModal} setOpen={setOpenOrderModal} />
         </>
     );

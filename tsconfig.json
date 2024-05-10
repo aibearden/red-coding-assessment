@@ -4,7 +4,7 @@
     "baseUrl": ".",
     "paths": { "@/*": ["./*"] },
     "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": ["es6", "DOM", "DOM.Iterable", "ESNext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
