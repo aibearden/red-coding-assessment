@@ -27,6 +27,8 @@ export default function OrderList({orders, rowSelectionModel, setRowSelectionMod
     return (
         <Box sx={{height: 400, width: '100%'}} id={"orders-list"}>
             <DataGrid
+                disableColumnFilter
+                disableColumnSorting
                 density="compact"
                 rows={orders}
                 columns={OrderListTableColumns}
