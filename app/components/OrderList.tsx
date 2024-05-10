@@ -1,7 +1,7 @@
 "use client"
 
 import { Box, IconButton } from "@mui/material";
-import { DataGrid, GridColDef, GridRowId } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridRowId, selectedGridRowsCountSelector, selectedGridRowsSelector } from "@mui/x-data-grid";
 import { Edit } from "@mui/icons-material";
 import { OrderInterface } from "../interfaces/orders";
 
@@ -24,9 +24,7 @@ export default function OrderList({orders, rowSelectionModel, setRowSelectionMod
         {field: "orderType", headerName: "Order Type", width: 200},
         {field: "customerName", headerName: "Customer", width: 150},
         {field: "actions", headerName: "", width: 50, renderCell: (params) => {
-            return (
-                <IconButton size="small" onClick={(evt: any) => handleEdit(evt, params.id)}><Edit fontSize="small"/></IconButton>
-            );
+            return (<IconButton size="small" onClick={(evt: any) => handleEdit(evt, params.id)}><Edit fontSize="small"/></IconButton>);
          }}
     ];
 
