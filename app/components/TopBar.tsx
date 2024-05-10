@@ -30,7 +30,7 @@ export default function TopBar() {
             <Stack direction={'row'} alignItems={'center'}>
                 {/* <img height={50} src="https://media.licdn.com/dms/image/C560BAQF5MfYJyRSuqQ/company-logo_100_100/0/1630670414756?e=1723075200&v=beta&t=c3kRH_6GLHKyFFz77WznlmjoU-ybLNvQLBrCUuxF_m4"></img> */}
                 <img src="../icon.png" height={20} alt="red logo" />
-                <Typography sx={{ paddingLeft: "6px" }}>Red Orders</Typography>
+                <Typography sx={{ paddingLeft: "6px" }}>Home</Typography>
             </Stack>
             <Stack
                 direction={"row"}
