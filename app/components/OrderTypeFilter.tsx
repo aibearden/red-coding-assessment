@@ -4,22 +4,21 @@ import { Autocomplete, TextField } from "@mui/material";
 import { orderTypes as listOfOrderTypes } from "../utils/orderinfo";
 
 interface OrderTypeFilterInterface {
-    orderTypes: string[],
-    setOrderTypes: any
+    orderType: string,
+    setOrderType: any
 }
 
-export default function OrderTypeFilter({ orderTypes, setOrderTypes }: OrderTypeFilterInterface) {
+export default function OrderTypeFilter({ orderType, setOrderType }: OrderTypeFilterInterface) {
 
     return (
         <Autocomplete
             id="order-type-filter"
-            multiple
             disablePortal
-            value={orderTypes}
+            value={orderType}
             options={listOfOrderTypes}
-            onChange={(_, newValue: string[] | null) => {
+            onChange={(_, newValue: string | null) => {
                 if(newValue) {
-                    setOrderTypes(newValue);
+                    setOrderType(newValue);
                 }
             }}
             size="small"

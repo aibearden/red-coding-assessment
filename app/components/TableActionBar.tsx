@@ -13,11 +13,11 @@ interface TableNavigationInterface {
     searchOrders: any,
     rowSelectionModel: GridRowId[],
     setRowSelectionModel: any,
-    filteredOrderTypes: string[],
-    setFilteredOrderTypes: any
+    filteredOrderType: string,
+    setFilteredOrderType: any
 }
 
-export default function TableActionBar({refreshOrderList, searchOrders, rowSelectionModel, setRowSelectionModel, filteredOrderTypes, setFilteredOrderTypes}: TableNavigationInterface) {
+export default function TableActionBar({refreshOrderList, searchOrders, rowSelectionModel, setRowSelectionModel, filteredOrderType, setFilteredOrderType}: TableNavigationInterface) {
 
     const [openOrderModal, setOpenOrderModal] = useState(false);
 
@@ -59,7 +59,7 @@ export default function TableActionBar({refreshOrderList, searchOrders, rowSelec
                 >
                     Delete Selected
                 </Button>
-                <OrderTypeFilter orderTypes={filteredOrderTypes} setOrderTypes={setFilteredOrderTypes} />
+                <OrderTypeFilter orderType={filteredOrderType} setOrderType={setFilteredOrderType} />
             </Stack>
             
             <OrderModal refreshOrderList={refreshOrderList} open={openOrderModal} setOpen={setOpenOrderModal} />

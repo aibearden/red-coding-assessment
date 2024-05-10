@@ -40,9 +40,9 @@ export const getOrders = async () => {
     }
 }
 
-export const getOrderByTypes = async (orderTypes: string[]) => {
+export const getOrderByTypes = async (orderType: string) => {
     try {
-        const response = await fetch(`${baseRedUrl}/Orders/ByType?orderType=${orderTypes.join(',')}`, {
+        const response = await fetch(`${baseRedUrl}/Orders/ByType?orderType=${orderType}`, {
             method: 'GET',
             headers: new Headers({
                 "ApiKey": getApiKey(),

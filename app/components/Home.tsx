@@ -16,7 +16,7 @@ export default function Home() {
 
     const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>([]);
     const [searchString, setSearchString] = useState('');
-    const [filteredOrderTypes, setFilteredOrderTypes] = useState<string[]>([]);
+    const [filteredOrderType, setFilteredOrderType] = useState<string>('');
 
     const dispatch = useDispatch();
     const orderList = useSelector((state: RootState) => state.orderList.orders);
@@ -36,8 +36,8 @@ export default function Home() {
     }, [])
 
     const refreshOrderList = () => {
-        if(filteredOrderTypes.length > 0) {
-            getOrderByTypes(filteredOrderTypes).then((data: OrderInterface[]) => {
+        if(filteredOrderType.length > 0) {
+            getOrderByTypes(filteredOrderType).then((data: OrderInterface[]) => {
                 dispatch(updateOrderList({orders: data}));
             })
         } else {
@@ -48,8 +48,8 @@ export default function Home() {
     }
 
     useEffect(() => {
-        if(filteredOrderTypes.length > 0) {
-            getOrderByTypes(filteredOrderTypes).then((data: OrderInterface[]) => {
+        if(filteredOrderType.length > 0) {
+            getOrderByTypes(filteredOrderType).then((data: OrderInterface[]) => {
                 dispatch(updateOrderList({orders: data}));
             })
         } else {
@@ -57,7 +57,7 @@ export default function Home() {
                 dispatch(updateOrderList({orders: data}));
             })
         }
-    }, [filteredOrderTypes])
+    }, [filteredOrderType])
 
     return (
         <Stack sx={{ width: '100vw', height: '100vh' }} id="home">
@@ -67,8 +67,8 @@ export default function Home() {
                 searchOrders={setSearchString} 
                 rowSelectionModel={rowSelectionModel} 
                 setRowSelectionModel={setRowSelectionModel} 
-                filteredOrderTypes={filteredOrderTypes} 
-                setFilteredOrderTypes={setFilteredOrderTypes} 
+                filteredOrderType={filteredOrderType} 
+                setFilteredOrderType={setFilteredOrderType} 
             />
             <OrderList 
                 orders={searchResults()} 

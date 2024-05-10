@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 
 test('Succesfully loads and renders TableActionBar component', () => {
 
-    const tableActionBar = render(<Provider store={store}><TableActionBar refreshOrderList={() => {}} searchOrders={() => {}} rowSelectionModel={[]} setRowSelectionModel={() => {}} filteredOrderTypes={[]} setFilteredOrderTypes={() => {}}/></Provider>)
+    const tableActionBar = render(<Provider store={store}><TableActionBar refreshOrderList={() => {}} searchOrders={() => {}} rowSelectionModel={[]} setRowSelectionModel={() => {}} filteredOrderType={""} setFilteredOrderType={() => {}}/></Provider>)
 
     expect(tableActionBar.getAllByText('Order Type'));
 })
