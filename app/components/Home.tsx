@@ -2,12 +2,12 @@
 
 import { Stack } from "@mui/material";
 import TopBar from "./TopBar";
-import TableNavigation from "./TableNavigation";
-import ItemList from "./ItemList";
+import TableActionBar from "./TableActionBar";
 import React, { useEffect, useState } from "react";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 import { OrderInterface } from "../interfaces/orders";
 import { getOrderByTypes, getOrders } from "../fetch/orders";
+import OrderList from "./OrderList";
 
 export default function Home() {
 
@@ -35,16 +35,16 @@ export default function Home() {
     }, [filteredOrderTypes])
 
     return (
-        <Stack sx={{ width: '100vw', height: '100vh' }}>
+        <Stack sx={{ width: '100vw', height: '100vh' }} id="home">
             <TopBar />
-            <TableNavigation 
+            <TableActionBar 
                 searchOrders={setSearchString} 
                 rowSelectionModel={rowSelectionModel} 
                 setRowSelectionModel={setRowSelectionModel} 
                 filteredOrderTypes={filteredOrderTypes} 
                 setFilteredOrderTypes={setFilteredOrderTypes} 
             />
-            <ItemList 
+            <OrderList 
                 orders={searchResults()} 
                 rowSelectionModel={rowSelectionModel} 
                 setRowSelectionModel={setRowSelectionModel} 

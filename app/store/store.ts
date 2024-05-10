@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { OrdersSlice } from "./features/ordersSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import orderReducer from "./features/orderSlice";
 
 export const store = configureStore({
     reducer: {
-        order: OrdersSlice.reducer
+        order: orderReducer
     }
 })
 
-export const useAppDispatch: () => typeof store.dispatch = useDispatch;
-export const useAppSelector: TypedUseSelectorHook<ReturnType<typeof store.getState>> = useSelector;
+export const useCustomAppDispatch: () => typeof store.dispatch = useDispatch;
+export type RootState = ReturnType<typeof store.getState>;

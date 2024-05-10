@@ -16,7 +16,7 @@ interface TableNavigationInterface {
     setFilteredOrderTypes: any
 }
 
-export default function TableNavigation({searchOrders, rowSelectionModel, setRowSelectionModel, filteredOrderTypes, setFilteredOrderTypes}: TableNavigationInterface) {
+export default function TableActionBar({searchOrders, rowSelectionModel, setRowSelectionModel, filteredOrderTypes, setFilteredOrderTypes}: TableNavigationInterface) {
 
     const [openOrderModal, setOpenOrderModal] = useState(false);
 
@@ -27,7 +27,7 @@ export default function TableNavigation({searchOrders, rowSelectionModel, setRow
 
     return (
         <>
-            <Stack direction={'row'} justifyContent={'flex-start'} alignItems={'center'} sx={{width: '100%', padding: '8px'}}>
+            <Stack id="table-action-bar" direction={'row'} justifyContent={'flex-start'} alignItems={'center'} sx={{width: '100%', padding: '8px'}}>
                 <TextField
                     size={"small"}
                     onChange={(evt) => searchOrders(evt.target.value)}

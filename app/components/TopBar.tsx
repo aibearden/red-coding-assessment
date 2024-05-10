@@ -21,6 +21,7 @@ export default function TopBar() {
 
     return (
         <Stack
+            id="top-nav-bar"
             direction={"row"}
             justifyContent={"space-between"}
             alignItems={"center"}

@@ -1,6 +1,6 @@
 import { NewOrderInterface } from "../interfaces/orders";
 
-export const baseUrl = "https://red-candidate-web.azurewebsites.net/api";
+export const baseRedUrl = "https://red-candidate-web.azurewebsites.net/api";
 
 export const sampleReturn = [
     {"createdByUserName": "Austin Bearden",
@@ -24,7 +24,7 @@ const getApiKey = () => {
 
 export const getOrders = async () => {
     try {
-        const response = await fetch(`${baseUrl}/Orders`, {
+        const response = await fetch(`${baseRedUrl}/Orders`, {
             method: 'GET',
             headers: new Headers({
                 "ApiKey": getApiKey(),
@@ -42,7 +42,7 @@ export const getOrders = async () => {
 
 export const getOrderByTypes = async (orderTypes: string[]) => {
     try {
-        const response = await fetch(`${baseUrl}/Orders/ByType?orderType=${orderTypes.join(',')}`, {
+        const response = await fetch(`${baseRedUrl}/Orders/ByType?orderType=${orderTypes.join(',')}`, {
             method: 'GET',
             headers: new Headers({
                 "ApiKey": getApiKey(),
@@ -60,7 +60,7 @@ export const getOrderByTypes = async (orderTypes: string[]) => {
 
 export const postOrder = async (newOrder: NewOrderInterface) => {
     try {
-        const response = await fetch("${baseUrl}/Orders", {
+        const response = await fetch(`${baseRedUrl}/Orders`, {
             method: 'POST',
             body: JSON.stringify(newOrder),
             headers: new Headers({
@@ -79,7 +79,7 @@ export const postOrder = async (newOrder: NewOrderInterface) => {
 
 export const deleteOrders = async (orders: string[]) => {
     try {
-        const response = await fetch("${baseUrl}/Orders/Delete", {
+        const response = await fetch(`${baseRedUrl}/Orders/Delete`, {
             method: 'POST',
             body: JSON.stringify(orders),
             headers: new Headers({
@@ -93,6 +93,8 @@ export const deleteOrders = async (orders: string[]) => {
         if(!response.ok) {
             throw new Error(`Error deleting orders`)
         }
+
+        return response.status;
     } catch(e) {
         throw new Error(`Error deleting orders + ${e}`)
     }

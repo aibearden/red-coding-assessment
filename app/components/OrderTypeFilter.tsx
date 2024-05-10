@@ -12,9 +12,9 @@ export default function OrderTypeFilter({ orderTypes, setOrderTypes }: OrderType
 
     return (
         <Autocomplete
+            id="order-type-filter"
             multiple
             disablePortal
-            id="order-type-menu"
             value={orderTypes}
             options={listOfOrderTypes}
             onChange={(_, newValue: string[] | null) => {

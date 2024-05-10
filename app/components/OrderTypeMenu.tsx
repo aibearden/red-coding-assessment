@@ -12,9 +12,9 @@ export default function OrderTypeMenu({ orderType, setOrderType }: OrderTypeMenu
 
     return (
         <Autocomplete
+            id="order-type-menu"
             disablePortal
             value={orderType}
-            id="order-type-menu"
             options={orderTypes}
             onChange={(event: any, newValue: string | null) => {
                 setOrderType(newValue);
