@@ -13,7 +13,7 @@ export default function RootLayout({ children }: Props) {
   return (
     <StoreProvider>
       <html lang="en">
-        <body>
+        <body style={{overflow: 'hidden'}}>
             {children}
         </body>
       </html>
