@@ -2,11 +2,11 @@
 
 import { Button, InputAdornment, Stack, TextField } from "@mui/material";
 import OrderModal from "./OrderModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Add, Delete, SearchOutlined } from "@mui/icons-material";
 import { deleteOrders } from "../fetch/orders";
 import { GridRowId } from "@mui/x-data-grid";
-import { OrderInterface } from "../interfaces/orders";
+import OrderTypeFilter from "./OrderTypeFilter";
 
 interface TableNavigationInterface {
     searchOrders: any,
@@ -17,6 +17,7 @@ interface TableNavigationInterface {
 export default function TableNavigation({searchOrders, rowSelectionModel, setRowSelectionModel}: TableNavigationInterface) {
 
     const [openOrderModal, setOpenOrderModal] = useState(false);
+    const [filteredOrderTypes, setFilteredOrderTypes] = useState<string[]>([]);
     // TO-DO: search modal ref
     // TO-DO: order modal ref
     // TO-DO: filter modal ref
@@ -25,6 +26,10 @@ export default function TableNavigation({searchOrders, rowSelectionModel, setRow
         deleteOrders(rowSelectionModel.map(orderId => orderId.toString()));
         setRowSelectionModel([]);
     }
+
+    useEffect(() => {
+        console.log(filteredOrderTypes);
+    }, [filteredOrderTypes])
 
     return (
         <>
@@ -56,6 +61,7 @@ export default function TableNavigation({searchOrders, rowSelectionModel, setRow
                 >
                     Delete Selected
                 </Button>
+                <OrderTypeFilter orderTypes={filteredOrderTypes} setOrderTypes={setFilteredOrderTypes} />
             </Stack>
             <OrderModal open={openOrderModal} setOpen={setOpenOrderModal} />
         </>

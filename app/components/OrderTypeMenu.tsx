@@ -1,23 +1,14 @@
 "use client"
 
-import { KeyboardArrowDownSharp } from "@mui/icons-material";
-import { MenuItem, Button, Autocomplete, FormControl, TextField } from "@mui/material";
-import { useState } from "react";
+import { Autocomplete, TextField } from "@mui/material";
+import { orderTypes } from "../utils/orderinfo";
 
-interface TableNavigation {
+interface OrderTypeMenuInterface {
     orderType: string,
     setOrderType: any
 }
 
-export default function OrderTypeMenu({ orderType, setOrderType }: TableNavigation) {
-
-    const orderTypes: string[] = [
-        'Standard',
-        'SaleOrder',
-        'PurchaseOrder',
-        'TransferOrder',
-        'ReturnOrder'
-    ];
+export default function OrderTypeMenu({ orderType, setOrderType }: OrderTypeMenuInterface) {
 
     return (
         <Autocomplete
