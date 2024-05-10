@@ -17,6 +17,9 @@ export default function OrderTypeFilter({ orderType, setOrderType }: OrderTypeFi
             value={orderType}
             options={listOfOrderTypes}
             onChange={(_, newValue: string | null) => {
+                if(newValue === null) {
+                    setOrderType('');
+                }
                 if(newValue) {
                     setOrderType(newValue);
                 }
