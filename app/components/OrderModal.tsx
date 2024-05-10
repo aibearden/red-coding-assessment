@@ -18,18 +18,22 @@ export default function OrderModal({ refreshOrderList, open, setOpen }: OrderMod
     const dispatch = useDispatch();
     const order = useSelector((state: RootState) => state.order);
 
-    function saveOrder() {
-        postOrder(order).then(_ => {
-            refreshOrderList();
-            setOpen(false);
-        })
-    }
-
-    function cancelChange() {
+    function clearModal() {
         dispatch(addOrderType({orderType: "Standard"}));
         dispatch(addCustomerName({customerName: ""}));
         dispatch(addCreatedByUserName({createdByUserName: ""}));
         setOpen(false);
+    }
+
+    function saveOrder() {
+        postOrder(order).then(_ => {
+            refreshOrderList();
+            clearModal()
+        })
+    }
+
+    function cancelChange() {
+        clearModal()
     }
 
     return (
@@ -49,6 +53,7 @@ export default function OrderModal({ refreshOrderList, open, setOpen }: OrderMod
                 </Stack>
                 <Stack sx={{height: '8%', marginTop: '4%'}} direction={'row'} justifyContent={'flex-end'}>
                     <Button size={'small'} variant={'outlined'} onClick={cancelChange}>Cancel</Button>
+                    <Button sx={{marginLeft: '4px'}} size={'small'} color={'secondary'} variant={'contained'} onClick={() => setOpen(false)}>Save Draft</Button>
                     <Button sx={{marginLeft: '4px'}} size={'small'} variant={'contained'} onClick={saveOrder}>Save</Button>
                 </Stack>
             </DialogContent>
