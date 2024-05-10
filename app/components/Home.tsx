@@ -4,7 +4,7 @@ import { Stack } from "@mui/material";
 import TopBar from "./TopBar";
 import TableNavigation from "./TableNavigation";
 import ItemList from "./ItemList";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 import { OrderInterface } from "../interfaces/orders";
 import { getOrderByTypes, getOrders } from "../fetch/orders";

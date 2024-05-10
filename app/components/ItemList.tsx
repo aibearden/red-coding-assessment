@@ -2,8 +2,6 @@
 
 import { Box, IconButton } from "@mui/material";
 import { DataGrid, GridColDef, GridRowId } from "@mui/x-data-grid";
-import { useEffect, useState } from "react";
-import { getOrders } from "../fetch/orders";
 import { Edit } from "@mui/icons-material";
 import { OrderInterface } from "../interfaces/orders";
 
@@ -31,9 +29,6 @@ export default function ItemList({orders, rowSelectionModel, setRowSelectionMode
             );
          }}
     ];
-
-    // could make this better with a custom hook with a custom made debounce in it
-
 
     return (
         <Box sx={{height: 400, width: '100%'}}>

@@ -23,7 +23,7 @@ export default function OrderTypeFilter({ orderTypes, setOrderTypes }: OrderType
                 }
             }}
             size="small"
-            sx={{ minWidth: "130px", width: "auto", marginLeft: "10px", marginTop: "6px"}}
+            sx={{ minWidth: "130px", width: "auto", marginLeft: "8px" }}
             filterSelectedOptions
             renderInput={(params) => <TextField {...params} label="Order Type" />}
         />
