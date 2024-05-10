@@ -28,6 +28,7 @@ export default function OrderModal({ open, setOpen }: { open: boolean, setOpen: 
     return (
         <Dialog onClose={() => setOpen(false)} open={open} id="order-modal">
             <DialogTitle>New Order</DialogTitle>
+            <div>{order?.createdByUserName}</div>
             <DialogContent sx={{ height: 400, width: 300 }}>
                 <Stack sx={{ height: '90%' }} direction={'column'} justifyContent={'space-evenly'}>
                     <OrderTypeMenu orderType={order?.orderType} setOrderType={(orderType: string) => dispatch(addOrderType({orderType: orderType}))} />
