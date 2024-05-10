@@ -1,7 +1,7 @@
 "use client"
 
 import { Box, IconButton } from "@mui/material";
-import { DataGrid, GridColDef, GridRowId, selectedGridRowsCountSelector, selectedGridRowsSelector } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridRowId } from "@mui/x-data-grid";
 import { Edit } from "@mui/icons-material";
 import { OrderInterface } from "../interfaces/orders";
 

@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import orderReducer from "./features/orderSlice";
 import orderListRedcuer from "./features/orderListSlice";
 

@@ -1,4 +1,3 @@
-import { getOrders } from "@/app/fetch/orders";
 import { OrderInterface } from "@/app/interfaces/orders";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 

@@ -1,6 +1,6 @@
 "use client"
 
-import {render, screen} from '@testing-library/react';
+import {render} from '@testing-library/react';
 import TableActionBar from '../components/TableActionBar';
 import "./setupTests";
 import { store } from '../store/store';
