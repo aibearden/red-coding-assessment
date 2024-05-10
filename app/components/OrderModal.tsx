@@ -7,13 +7,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCreatedByUserName, addCustomerName, addOrderType } from "../store/features/orderSlice";
 import { postOrder } from "../fetch/orders";
 
-export default function OrderModal({ open, setOpen }: { open: boolean, setOpen: (arg0: boolean) => void }) {
+interface OrderModalInterface { 
+    refreshOrderList: any,
+    open: boolean, 
+    setOpen: (arg0: boolean) => void
+}
+
+export default function OrderModal({ refreshOrderList, open, setOpen }: OrderModalInterface) {
 
     const dispatch = useDispatch();
     const order = useSelector((state: RootState) => state.order);
 
     function saveOrder() {
         postOrder(order).then(_ => {
+            refreshOrderList();
             setOpen(false);
         })
     }
@@ -28,7 +35,6 @@ export default function OrderModal({ open, setOpen }: { open: boolean, setOpen: 
     return (
         <Dialog onClose={() => setOpen(false)} open={open} id="order-modal">
             <DialogTitle>New Order</DialogTitle>
-            <div>{order?.createdByUserName}</div>
             <DialogContent sx={{ height: 400, width: 300 }}>
                 <Stack sx={{ height: '90%' }} direction={'column'} justifyContent={'space-evenly'}>
                     <OrderTypeMenu orderType={order?.orderType} setOrderType={(orderType: string) => dispatch(addOrderType({orderType: orderType}))} />

@@ -35,6 +35,18 @@ export default function Home() {
         })
     }, [])
 
+    const refreshOrderList = () => {
+        if(filteredOrderTypes.length > 0) {
+            getOrderByTypes(filteredOrderTypes).then((data: OrderInterface[]) => {
+                dispatch(updateOrderList({orders: data}));
+            })
+        } else {
+            getOrders().then((data: OrderInterface[]) => {
+                dispatch(updateOrderList({orders: data}));
+            })
+        }
+    }
+
     useEffect(() => {
         if(filteredOrderTypes.length > 0) {
             getOrderByTypes(filteredOrderTypes).then((data: OrderInterface[]) => {
@@ -51,6 +63,7 @@ export default function Home() {
         <Stack sx={{ width: '100vw', height: '100vh' }} id="home">
             <TopBar />
             <TableActionBar 
+                refreshOrderList={refreshOrderList}
                 searchOrders={setSearchString} 
                 rowSelectionModel={rowSelectionModel} 
                 setRowSelectionModel={setRowSelectionModel} 

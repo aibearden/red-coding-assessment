@@ -1,3 +1,4 @@
+import { getOrders } from "@/app/fetch/orders";
 import { OrderInterface } from "@/app/interfaces/orders";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
@@ -8,9 +9,7 @@ export const orderListSlice = createSlice({
     initialState: orderListInitialState,
     reducers: {
         updateOrderList: (state, action: PayloadAction<{orders: OrderInterface[]}>) => {
-            console.log(action.payload.orders);
             state.orders = action.payload.orders;
-
         }
     }
 });

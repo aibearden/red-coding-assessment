@@ -9,6 +9,7 @@ import { GridRowId } from "@mui/x-data-grid";
 import OrderTypeFilter from "./OrderTypeFilter";
 
 interface TableNavigationInterface {
+    refreshOrderList: any,
     searchOrders: any,
     rowSelectionModel: GridRowId[],
     setRowSelectionModel: any,
@@ -16,12 +17,14 @@ interface TableNavigationInterface {
     setFilteredOrderTypes: any
 }
 
-export default function TableActionBar({searchOrders, rowSelectionModel, setRowSelectionModel, filteredOrderTypes, setFilteredOrderTypes}: TableNavigationInterface) {
+export default function TableActionBar({refreshOrderList, searchOrders, rowSelectionModel, setRowSelectionModel, filteredOrderTypes, setFilteredOrderTypes}: TableNavigationInterface) {
 
     const [openOrderModal, setOpenOrderModal] = useState(false);
 
     function deleteSelectedOrder() {
-        deleteOrders(rowSelectionModel.map(orderId => orderId.toString()));
+        deleteOrders(rowSelectionModel.map(orderId => orderId.toString())).then(_ => {
+            refreshOrderList();
+        });
         setRowSelectionModel([]);
     }
 
@@ -59,7 +62,7 @@ export default function TableActionBar({searchOrders, rowSelectionModel, setRowS
                 <OrderTypeFilter orderTypes={filteredOrderTypes} setOrderTypes={setFilteredOrderTypes} />
             </Stack>
             
-            <OrderModal open={openOrderModal} setOpen={setOpenOrderModal} />
+            <OrderModal refreshOrderList={refreshOrderList} open={openOrderModal} setOpen={setOpenOrderModal} />
         </>
     );
 }
