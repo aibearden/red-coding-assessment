@@ -11,13 +11,14 @@ import OrderTypeFilter from "./OrderTypeFilter";
 interface TableNavigationInterface {
     searchOrders: any,
     rowSelectionModel: GridRowId[],
-    setRowSelectionModel: any
+    setRowSelectionModel: any,
+    filteredOrderTypes: string[],
+    setFilteredOrderTypes: any
 }
 
-export default function TableNavigation({searchOrders, rowSelectionModel, setRowSelectionModel}: TableNavigationInterface) {
+export default function TableNavigation({searchOrders, rowSelectionModel, setRowSelectionModel, filteredOrderTypes, setFilteredOrderTypes}: TableNavigationInterface) {
 
     const [openOrderModal, setOpenOrderModal] = useState(false);
-    const [filteredOrderTypes, setFilteredOrderTypes] = useState<string[]>([]);
     // TO-DO: search modal ref
     // TO-DO: order modal ref
     // TO-DO: filter modal ref
@@ -26,10 +27,6 @@ export default function TableNavigation({searchOrders, rowSelectionModel, setRow
         deleteOrders(rowSelectionModel.map(orderId => orderId.toString()));
         setRowSelectionModel([]);
     }
-
-    useEffect(() => {
-        console.log(filteredOrderTypes);
-    }, [filteredOrderTypes])
 
     return (
         <>

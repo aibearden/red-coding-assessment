@@ -40,7 +40,7 @@ export const getOrders = async () => {
 
 export const getOrderByTypes = async (orderTypes: string[]) => {
     try {
-        const response = await fetch(`https://red-candidate-web.azurewebsites.net/api/Order/ByType?orderType=${orderTypes}`, {
+        const response = await fetch(`https://red-candidate-web.azurewebsites.net/api/Orders/ByType?orderType=${orderTypes.join(',')}`, {
             method: 'GET',
             headers: new Headers({
                 "ApiKey": getApiKey(),

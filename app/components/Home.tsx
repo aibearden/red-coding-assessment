@@ -4,34 +4,52 @@ import { Stack } from "@mui/material";
 import TopBar from "./TopBar";
 import TableNavigation from "./TableNavigation";
 import ItemList from "./ItemList";
-import React, {useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 import { OrderInterface } from "../interfaces/orders";
-import { getOrders } from "../fetch/orders";
+import { getOrderByTypes, getOrders } from "../fetch/orders";
 
 export default function Home() {
 
     const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>([]);
     const [orders, setOrders] = useState<OrderInterface[]>([]);
     const [searchString, setSearchString] = useState('');
+    const [filteredOrderTypes, setFilteredOrderTypes] = useState<string[]>([]);
 
     const searchResults = () => {
-        if(searchString.length > 0) {
+        if (searchString.length > 0) {
             return orders.filter(order => order.orderId.toLowerCase().includes(searchString.trim().toLowerCase()));
         } else return orders;
     }
 
     useEffect(() => {
-        getOrders().then((data) => {
-            setOrders(data);
-        })
-    }, [])
+        console.log(filteredOrderTypes)
+        if(filteredOrderTypes.length > 0) {
+            getOrderByTypes(filteredOrderTypes).then((data) => {
+                setOrders(data);
+            })
+        } else {
+            getOrders().then((data) => {
+                setOrders(data);
+            })
+        }
+    }, [filteredOrderTypes])
 
     return (
-        <Stack sx={{ width: '100vw', height: '100vh'}}>
+        <Stack sx={{ width: '100vw', height: '100vh' }}>
             <TopBar />
-            <TableNavigation searchOrders={setSearchString} rowSelectionModel={rowSelectionModel} setRowSelectionModel={setRowSelectionModel} />
-            <ItemList orders={searchResults()} rowSelectionModel={rowSelectionModel} setRowSelectionModel={setRowSelectionModel} />
+            <TableNavigation 
+                searchOrders={setSearchString} 
+                rowSelectionModel={rowSelectionModel} 
+                setRowSelectionModel={setRowSelectionModel} 
+                filteredOrderTypes={filteredOrderTypes} 
+                setFilteredOrderTypes={setFilteredOrderTypes} 
+            />
+            <ItemList 
+                orders={searchResults()} 
+                rowSelectionModel={rowSelectionModel} 
+                setRowSelectionModel={setRowSelectionModel} 
+            />
         </Stack>
     );
 };
